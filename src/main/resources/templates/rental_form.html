@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Rent Book</title>
+  <style>
+    form { margin: 20px 0; }
+    label { display: block; margin: 10px 0; }
+    select { padding: 5px; width: 200px; }
+    button { padding: 5px 10px; }
+  </style>
+</head>
+<body>
+<h1>Rent Book</h1>
+<form th:action="@{/rent}" method="post">
+  <label>Client:
+    <select name="clientId" required>
+      <option th:each="client : ${clients.content}" th:value="${client.id}" th:text="${client.fullName}"></option>
+    </select>
+  </label>
+  <label>Book:
+    <select name="bookId" required>
+      <option th:each="book : ${books.content}" th:value="${book.id}" th:text="${book.title}"></option>
+    </select>
+  </label>
+  <button type="submit">Rent</button>
+</form>
+<a href="/clients">Cancel</a>
+</body>
+</html>

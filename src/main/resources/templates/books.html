@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h1>Books</h1>
+<a href="/books/new">Add New Book</a>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="book : ${books.content}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.isbn}"></td>
+        <td><a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a></td>
+    </tr>
+</table>
+<div th:if="${books.totalPages > 1}">
+    <a th:href="@{/books(page=${books.number - 1})}" th:if="${books.hasPrevious()}">Previous</a>
+    <a th:href="@{/books(page=${books.number + 1})}" th:if="${books.hasNext()}">Next</a>
+</div>
+<a href="/clients">View Clients</a> | <a href="/rent">Rent Book</a>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Client Form</title>
+    <style>
+        form { margin: 20px 0; }
+        label { display: block; margin: 10px 0; }
+        input { padding: 5px; width: 200px; }
+        button { padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<h1 th:if="${client.id == null}">Add Client</h1>
+<h1 th:unless="${client.id == null}">Edit Client</h1>
+<form th:object="${client}" th:action="@{/clients}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Full Name: <input type="text" th:field="*{fullName}" required/></label>
+    <label>Birth Date: <input type="date" th:field="*{birthDate}" required/></label>
+    <button type="submit">Save</button>
+</form>
+<a href="/clients">Cancel</a>
+</body>
+</html>

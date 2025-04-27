@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Clients</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+<h1>Clients</h1>
+<a href="/clients/new">Add New Client</a>
+<table>
+  <tr>
+    <th>Full Name</th>
+    <th>Birth Date</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="client : ${clients.content}">
+    <td th:text="${client.fullName}"></td>
+    <td th:text="${client.birthDate}"></td>
+    <td><a th:href="@{/clients/edit/{id}(id=${client.id})}">Edit</a></td>
+  </tr>
+</table>
+<div th:if="${clients.totalPages > 1}">
+  <a th:href="@{/clients(page=${clients.number - 1})}" th:if="${clients.hasPrevious()}">Previous</a>
+  <a th:href="@{/clients(page=${clients.number + 1})}" th:if="${clients.hasNext()}">Next</a>
+</div>
+<a href="/books">View Books</a> | <a href="/rent">Rent Book</a>
+</body>
+</html>

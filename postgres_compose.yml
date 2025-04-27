@@ -1,0 +1,10 @@
+services:
+  book-service-postgres:
+    image: 'postgres:latest'
+    container_name: book-service-postgres-container
+    environment:
+      - 'POSTGRES_DB=book-service'
+      - 'POSTGRES_USER=book-service'
+      - 'POSTGRES_PASSWORD=12345678'
+    ports:
+      - '5432:5432'
