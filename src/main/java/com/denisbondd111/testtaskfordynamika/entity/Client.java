@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Data
@@ -19,6 +20,7 @@ public class Client {
     private Long id;
 
     @NotBlank(message = "Full name is required")
+    @Pattern(regexp = "[a-zA-Z]+", message = "Must contain only letters")
     @Column(name = "full_name", nullable = false)
     private String fullName;
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Data
@@ -25,6 +26,7 @@ public class Rental {
     private Book book;
 
     @NotNull
+    @Pattern(regexp = "\\d+", message = "Must contain only digits")
     @Column(name = "rental_date", nullable = false)
     private LocalDateTime rentalDate;
 }

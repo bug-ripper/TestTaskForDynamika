@@ -5,6 +5,7 @@ import com.denisbondd111.testtaskfordynamika.service.BookService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,7 +33,10 @@ public class BookController {
     }
 
     @PostMapping()
-    public String saveBook(@Valid @ModelAttribute Book book) {
+    public String saveBook(@Valid @ModelAttribute Book book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "books_form";
+        }
         bookService.save(book);
         return "redirect:/books";
     }

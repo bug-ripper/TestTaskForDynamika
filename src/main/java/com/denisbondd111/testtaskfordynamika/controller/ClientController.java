@@ -5,6 +5,7 @@ import com.denisbondd111.testtaskfordynamika.service.ClientService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,7 +32,10 @@ public class ClientController {
     }
 
     @PostMapping()
-    public String saveClient(@Valid @ModelAttribute Client client) {
+    public String saveClient(@Valid @ModelAttribute Client client, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "clients_form";
+        }
         clientService.save(client);
         return "redirect:/clients";
     }
